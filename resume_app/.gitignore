@@ -1,0 +1,21 @@
+### Environment Variables ###
+.env
+*.env
+
+### Virtual Environment ###
+# Ignore the virtual environment directory
+venv/
+.venv/
+env/
+
+### Python ###
+# Ignore Python bytecode and cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+### Database ###
+# Ignore the local SQLite database
+db.sqlite3
+*.sqlite3
