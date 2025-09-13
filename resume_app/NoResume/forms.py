@@ -24,7 +24,7 @@ class SkillsInfoForm(forms.Form):
 
 class ExperienceForm(forms.Form):
     experience = forms.CharField(max_length=100, required=True)
-    start_date = forms.DateField(auto_now=False, auto_now_add=False, required=True)
-    end_date = forms.DateField(auto_now=False, auto_now_add=False, required=True)
+    start_date = forms.DateField(required=True)
+    end_date = forms.DateField(required=True)
     organization = forms.CharField(max_length=100, required=True)
     location = forms.CharField(max_length=100, required=False)

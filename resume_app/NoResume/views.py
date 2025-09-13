@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.forms import formset_factory
 from .ai_wrapper import content_generator
-from .models import User, Skill
-from .forms import UserInfoForm, SkillsInfoForm
+from .models import User, Skill, Experience
+from .forms import UserInfoForm, SkillsInfoForm, ExperienceForm
 
 
 # Create your views here.
@@ -49,15 +49,46 @@ def skills_input(request):
                         source=form.cleaned_data.get("source"),
                     )
             return redirect("experience")
-        # If not valid, fall through to render below
     else:
         formset = SkillsFormSet()
 
     return render(
         request,
         "input.html",
-        {"formset": formset, "heading": "Enter your Skills"},
+        {"formset": formset, "heading": "Enter your Skills", "add_button": "Add skill"},
     )
 
+
+"""
+
+"""
+
+
 def experience_input(request):
-    
+    ExperienceFormSet = formset_factory(ExperienceForm, extra=1)
+
+    if request.method == "POST":
+        formset = ExperienceFormSet(request.POST)
+        if formset.is_valid():
+            for form in formset:
+                if form.cleaned_data:
+                    Experience.objects.create(
+                        experience=form.cleaned_data["experience"],
+                        start_date=form.cleaned_data["start_date"],
+                        end_date=form.cleaned_data["end_date"],
+                        organization=form.cleaned_data["organization"],
+                        location=form.cleaned_data["location"],
+                    )
+            return redirect("experience")
+    else:
+        formset = ExperienceFormSet()
+
+    return render(
+        request,
+        "input.html",
+        {
+            "formset": formset,
+            "heading": "Enter your Experience",
+            "add_button": "Add Experience",
+        },
+    )
