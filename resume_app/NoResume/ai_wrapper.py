@@ -30,7 +30,3 @@ def content_generator(user_message):
     )
 
     return response.choices[0].message.content
-
-
-if __name__ == "__main__":
-    content_generator()

@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Info</title>
+    <script src="{% static 'js/add_skills.js' %}" defer></script>
+  </head>
+  <body>
+    <h1>{{ heading }}</h1>
+    <form method="POST">
+      {% csrf_token %}
+      {% if form %}
+        {{ form.as_p }}
+      {% elif formset %}
+        {{ formset.management_form }}
+        <div id="formset_container">
+          {% for form in formset %}
+            <div id="form_row">{{ form.as_p }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+      <button type="button" id="add_skill">Add Skill</button>
+      <button type="submit">Next</button>
+    </form>
+  </body>
+</html>

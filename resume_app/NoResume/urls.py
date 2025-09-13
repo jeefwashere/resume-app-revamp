@@ -3,5 +3,7 @@ from . import views
 
 urlpatterns = [
     path("", views.index, name="index"),
-    path("prompt/", views.ai_prompter, name="ai_prompter"),
+    path("userinfo/", views.userinfo_input, name="userinfo"),
+    path("skills/", views.skills_input, name="skills"),
+    path("experience/", views.experience_input, name="experience"),
 ]
