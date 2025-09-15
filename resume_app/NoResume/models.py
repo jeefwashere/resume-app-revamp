@@ -14,7 +14,7 @@ class User(models.Model):
 
 
 class Skill(models.Model):
-    users = models.ManyToManyField(User, related_name="skills")
+    user = models.ManyToManyField(User, related_name="skills")
     skill_id = models.AutoField(primary_key=True)
     skill_name = models.CharField(max_length=100)
     skill_proficiency = models.CharField(max_length=100, null=True, blank=True)

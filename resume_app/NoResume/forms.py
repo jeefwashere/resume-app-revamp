@@ -2,6 +2,10 @@ from django import forms
 from . import models
 
 
+class DatePicker(forms.DateInput):
+    input_type = "date"
+
+
 class UserInfoForm(forms.Form):
     name = forms.CharField(max_length=100, required=True)
     email = forms.EmailField(max_length=100, required=True)
@@ -24,7 +28,11 @@ class SkillsInfoForm(forms.Form):
 
 class ExperienceForm(forms.Form):
     experience = forms.CharField(max_length=100, required=True)
-    start_date = forms.DateField(required=True)
-    end_date = forms.DateField(required=True)
+    start_Date = forms.DateField(required=True, widget=DatePicker)
+    end_Date = forms.DateField(required=True, widget=DatePicker)
     organization = forms.CharField(max_length=100, required=True)
     location = forms.CharField(max_length=100, required=False)
+
+
+class ResultsForm(UserInfoForm, SkillsInfoForm, ExperienceForm):
+    pass

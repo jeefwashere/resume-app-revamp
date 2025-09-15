@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Confirm your Info</title>
+  </head>
+  <body>
+    <div id="info_container">
+      <h1>Confirm your Info</h1>
+      <form method="POST">
+        {% csrf_token %}
+        <h2>User Info</h2>
+        {{ user_info.as_p }}
+        <h2>Skills</h2>
+        {{ skills_formset.management_form }}
+        <div id="skills_formset_container">
+          {% for form in skills_formset %}
+            <div id="form_row">{{ form.as_p }}</div>
+          {% endfor %}
+        </div>
+        <h2>Experience</h2>
+        {{ experience_formset.management_form }}
+        <div id="experience_formset_container">
+          {% for form in experience_formset %}
+            <div id="form_row">{{ form.as_p }}</div>
+          {% endfor %}
+        </div>
+        <button type="submit">Confirm</button>
+      </form>
+    </div>
+  </body>
+</html>
