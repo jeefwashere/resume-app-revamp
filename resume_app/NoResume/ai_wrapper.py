@@ -17,8 +17,8 @@ def content_generator(user_id):
 
     client = OpenAI(api_key=api_key)
     user = User.objects.filter(id=user_id)
-    user_skills = Skill.objects.filter(id=user_id)
-    user_experience = Experience.objects.filter(id=user_id)
+    user_skills = Skill.objects.filter(user=user)
+    user_experience = Experience.objects.filter(user=user)
 
     user_data = (
         f"Name: {user.name}\n"
@@ -39,8 +39,6 @@ def content_generator(user_id):
 
     response = client.chat.completions.create(
         model="gpt-4o",
-        # messages=[{"role" : "system", "content":"You are an expert latex content generator and editor."},
-        #           {"role":"user","content":""}],
         messages=[
             {
                 "role": "system",
