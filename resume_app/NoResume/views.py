@@ -208,8 +208,11 @@ def result_page(request):
                         organization=form.cleaned_data["organization"],
                         location=form.cleaned_data["location"],
                     )
-
-            return redirect("results")
+            ai_resume = content_generator(user_id)
+            return render(
+                request,
+                "resume.html",
+            )
 
     return render(
         request,
