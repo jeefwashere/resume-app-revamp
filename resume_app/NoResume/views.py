@@ -58,6 +58,11 @@ def skills_input(request):
         if formset.is_valid():
             for form in formset:
                 if form.cleaned_data:
+
+                    # Future feature, adding deletion
+                    if form.cleaned_data.get("DELETE"):
+                        continue
+
                     skill = Skill.objects.create(
                         skill_name=form.cleaned_data.get("skill"),
                         skill_proficiency=form.cleaned_data.get("proficiency"),
@@ -96,6 +101,9 @@ def experience_input(request):
         if formset.is_valid():
             for form in formset:
                 if form.cleaned_data:
+                    if form.cleaned_data.get("DELETE"):
+                        continue
+
                     Experience.objects.create(
                         user=user,
                         experience_name=form.cleaned_data.get("experience"),
@@ -164,7 +172,7 @@ def result_page(request):
     )
 
     if request.method == "POST":
-        user_form = UserInfoForm(request.POST, instance=user)
+        user_form = UserInfoForm(request.POST)
         skills_form = skills_formset(request.POST)
         experience_form = experience_formset(request.POST)
 
@@ -173,7 +181,11 @@ def result_page(request):
             and skills_form.is_valid()
             and experience_form.is_valid()
         ):
-            user_form.save()
+            user.name = user_form.cleaned_data["name"]
+            user.email = user_form.cleaned_data["email"]
+            user.address = user_form.cleaned_data["address"]
+            user.link = user_form.cleaned_data["link"]
+            user.save()
 
             Skill.objects.filter(user=user).delete()
             for form in skills_form:

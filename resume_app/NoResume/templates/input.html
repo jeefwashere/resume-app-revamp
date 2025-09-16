@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{ title }}</title>
-    <script src="{% static 'js/add_skills.js' %}" defer></script>
+    <script src="{% static 'js/add_remove_buttons.js' %}" defer></script>
   </head>
   <body>
     <h1>{{ heading }}</h1>
@@ -17,12 +17,18 @@
         {{ formset.management_form }}
         <div id="formset_container">
           {% for form in formset %}
-            <div id="form_row">{{ form.as_p }}</div>
+            <div class="form_row">
+              {{ form.as_p }}
+              <button type="button" class="remove_form">Remove</button>
+            </div>
           {% endfor %}
         </div>
       {% endif %}
       {% if add_button %}
-        <button type="button" id="add_skill">{{ add_button }}</button>
+        <button type="button" id="add_button">{{ add_button }}</button>
+      {% endif %}
+      {% if delete_button %}
+        <button type="button" id="delete_button">{{ delete_button }}</button>
       {% endif %}
       <button type="submit">Next</button>
     </form>

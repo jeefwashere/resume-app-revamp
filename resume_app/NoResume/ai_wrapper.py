@@ -1,4 +1,5 @@
 import os
+from .models import User, Skill, Experience
 from openai import OpenAI
 
 # Load .env file
@@ -10,7 +11,7 @@ except ImportError:
     pass
 
 
-def content_generator(user_message):
+def content_generator(user_id):
 
     api_key = os.environ.get("OPENAI_API_KEY")
 
@@ -23,7 +24,7 @@ def content_generator(user_message):
         messages=[
             {
                 "role": "system",
-                "content": "You are a test platform, generate a message that validates that you are functioning",
+                "content": "You are an expert in Resume Creation",
             },
             {"role": "user", "content": user_message},
         ],
