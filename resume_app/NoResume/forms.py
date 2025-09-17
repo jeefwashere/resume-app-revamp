@@ -14,7 +14,11 @@ class UserInfoForm(forms.Form):
 
 
 class SkillsInfoForm(forms.Form):
-    skill = forms.CharField(max_length=100, required=True)
+    skill = forms.CharField(
+        max_length=100,
+        required=True,
+        widget=forms.TextInput(attrs={"required": "required"}),
+    )
     PROFICIENCY_CHOICES = [
         (None, "--"),
         ("beginner", "Beginner"),
@@ -23,14 +27,32 @@ class SkillsInfoForm(forms.Form):
         ("expert", "Expert"),
     ]
     proficiency = forms.ChoiceField(choices=PROFICIENCY_CHOICES, required=False)
-    source = forms.CharField(max_length=100, required=True)
+    source = forms.CharField(
+        max_length=100,
+        required=True,
+        widget=forms.TextInput(attrs={"required": "required"}),
+    )
 
 
 class ExperienceForm(forms.Form):
-    experience = forms.CharField(max_length=100, required=True)
-    start_Date = forms.DateField(required=True, widget=DatePicker)
-    end_Date = forms.DateField(required=True, widget=DatePicker)
-    organization = forms.CharField(max_length=100, required=True)
+    experience = forms.CharField(
+        max_length=100,
+        required=True,
+        widget=forms.TextInput(attrs={"required": "required"}),
+    )
+    start_date = forms.DateField(
+        required=True,
+        widget=DatePicker(attrs={"required": "required"}),
+    )
+    end_date = forms.DateField(
+        required=True,
+        widget=DatePicker(attrs={"required": "required"}),
+    )
+    organization = forms.CharField(
+        max_length=100,
+        required=True,
+        widget=forms.TextInput(attrs={"required": "required"}),
+    )
     location = forms.CharField(max_length=100, required=False)
 
 

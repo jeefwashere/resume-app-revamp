@@ -9,7 +9,7 @@ class User(models.Model):
     email = models.EmailField(max_length=254)
     link = models.URLField(max_length=200, null=True, blank=True)
 
-    def __repr__(self):
+    def __str__(self):
         return self.name
 
 
@@ -20,7 +20,7 @@ class Skill(models.Model):
     skill_proficiency = models.CharField(max_length=100, null=True, blank=True)
     source = models.CharField(max_length=100, null=True)
 
-    def __repr__(self):
+    def __str__(self):
         return self.skill_name
 
 
@@ -33,7 +33,7 @@ class Experience(models.Model):
     organization = models.CharField(max_length=100)
     location = models.CharField(max_length=100)
 
-    def __repr__(self):
+    def __str__(self):
         return f"{self.experience_name} at {self.location}"
 
 
@@ -48,7 +48,7 @@ class Volunteer_Experience(models.Model):
     organization = models.CharField(max_length=100)
     location = models.CharField(max_length=100)
 
-    def __repr__(self):
+    def __str__(self):
         return self.volunteer_name
 
 
@@ -61,7 +61,7 @@ class Certification(models.Model):
     date = models.DateField(auto_now=False, auto_now_add=False, null=True)
     provider = models.CharField(max_length=100)
 
-    def __repr__(self):
+    def __str__(self):
         return self.certificate_name
 
 
@@ -75,5 +75,5 @@ class Education(models.Model):
     location = models.CharField(max_length=100)
     grade = models.IntegerField(null=True)
 
-    def __repr__(self):
+    def __str__(self):
         return f"{self.education_name} from {self.institution}"
